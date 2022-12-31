@@ -402,6 +402,8 @@ describe("DDL_GMX.ts", async () => {
                 [contracts.alice, contracts.PoolDDL, contracts.bob],
                 [liqRevenue, poolRevenue, userCollateralAndProfits],
             )
+            const borrowedByCollateral = await contracts.DDL_GMX.borrowedByCollateral(id)
+            expect(borrowedByCollateral[0]).to.be.eq(parseUnits("0"))
             expect(await contracts.AccountManagerToken.ownerOf(id)).to.be.eq(contracts.bob.address)
         })
 
@@ -438,6 +440,8 @@ describe("DDL_GMX.ts", async () => {
                 [contracts.alice, contracts.PoolDDL, contracts.bob],
                 [liqRevenue, poolRevenue, userCollateralAndProfits],
             )
+            const borrowedByCollateral = await contracts.DDL_GMX.borrowedByCollateral(id)
+            expect(borrowedByCollateral[0]).to.be.eq(parseUnits("0"))
             expect(await contracts.AccountManagerToken.ownerOf(id)).to.be.eq(contracts.bob.address)
 
         })

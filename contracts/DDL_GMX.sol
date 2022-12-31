@@ -249,6 +249,7 @@ contract DDL_GMX is DDL {
             uint256 returnValue = USDC.balanceOf(liqInf.doppelganger) - liqInf.balanceBefore;
             uint256 profit = liqInf.profit;
             pool.subTotalLocked(borrowed);
+            borrowedByCollateral[id] = BorrowedByCollateral(0,block.timestamp);
             if (liqInf.isBorderPrice) {
                 USDC.transferFrom(liqInf.doppelganger,address(pool), borrowed);
                 USDC.transferFrom(
@@ -289,11 +290,7 @@ contract DDL_GMX is DDL {
                     (diff * 10) / 100
                 );
             }
-            collateralToken.transferFrom(
-                address(this),
-                collateralOwner[id],
-                id
-            );
+            unlock(id);
         }
     }
 
